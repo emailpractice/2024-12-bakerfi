@@ -1,0 +1,10 @@
+./contracts/core/MultiCommand.sol
+./contracts/core/VaultRouter.sol
+./contracts/core/MultiStrategy.sol
+./contracts/libraries/AerodromeLibrary.sol
+./contracts/libraries/CurveFiLibrary.sol
+./contracts/libraries/RebaseLibrary.sol
+./contracts/libraries/MathLibrary.sol
+./contracts/libraries/UniV2Library.sol
+./contracts/libraries/UniV3Library.sol
+./contracts/core/router/Commands.sol
