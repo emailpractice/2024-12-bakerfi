@@ -64,7 +64,7 @@ Unlock higher yields with flexible, low-risk strategies that go beyond just ETH 
   - [BakerFi Code4rena Competitive Audit Q2 2024](https://code4rena.com/reports/2024-05-bakerfi)
 - **Documentation:** https://bakerfi.notion.site/BakerFi-Documentation-58ad03351df447d082968b14952a7c3b
 - **Website:** https://bakerfi.xyz/
-- **X/Twitter:** https://x.com/bakerfi_
+- **X/Twitter:** [https://x.com/bakerfi_](https://x.com/bakerfi_)
 - **Discord:** https://dub.sh/bakerfi-discord
 
 ---
