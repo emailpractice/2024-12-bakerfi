@@ -1,4 +1,73 @@
+# BakerFi Invitational audit details
+- Total Prize Pool: $24,000 in USDC
+  - HM awards: $19,100 in USDC
+  - QA awards: $800 in USDC
+  - Judge awards: $3,600 in USDC
+  - Scout awards: $500 in USDC
+- [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
+- Starts December 11, 2024 20:00 UTC
+- Ends December 27, 2024 20:00 UTC
 
+**Note re: risk level upgrades/downgrades**
+
+Two important notes about judging phase risk adjustments: 
+- High-risk or Medium-risk submissions downgraded to Low-risk (QA) will be ineligible for awards.
+- Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported.
+
+As such, wardens are encouraged to select the appropriate risk level carefully during the submission phase.
+
+## This is a Private audit
+
+This audit repo and its Discord channel are accessible to **certified wardens only.** Participation in private audits is bound by:
+
+1. Code4rena's [Certified Contributor Terms and Conditions](https://github.com/code-423n4/code423n4.com/blob/main/_data/pages/certified-contributor-terms-and-conditions.md)
+2. C4's [Certified Contributor Code of Professional Conduct](https://code4rena.notion.site/Code-of-Professional-Conduct-657c7d80d34045f19eee510ae06fef55)
+
+*All discussions regarding private audits should be considered private and confidential, unless otherwise indicated.*
+
+Please review the following confidentiality requirements carefully, and if anything is unclear, ask questions in the private audit channel in the C4 Discord.
+
+## Automated Findings / Publicly Known Issues
+
+The 4naly3er report can be found [here](https://github.com/code-423n4/2024-12-bakerfi/blob/main/4naly3er-report.md).
+
+_Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
+
+- Minting Fees Accuracy
+
+
+# Overview
+
+**BakerFi Smart Contracts**
+
+Unlock higher yields with flexible, low-risk strategies that go beyond just ETH staking. Our platform leverages diverse opportunities across liquidity, money markets and defi protocols, allowing you to maximize returns with customized, secure and curated investments.
+
+**Features**
+
+* Pool Based Yield Generation
+* Liquidation Protection
+* Easy to Use Interface
+* Leverage based on Flash Loans
+* Liquid Yield Shares brETH
+* Proxied Deployment for Settings, Vault and Strategies
+
+**Integrations**
+* AAVE v3
+* Lido Staking Contracts
+* Uniswap v3
+* Balancer Flash Loans
+
+## Links
+
+- **Previous audits:**  
+  - [Creed Audit Q1 2024](https://github.com/baker-fi/bakerfi-contracts/blob/master/audits/audit-creed-2024-05-10.pdf)
+  - [BakerFi Code4rena Competitive Audit Q2 2024](https://code4rena.com/reports/2024-05-bakerfi)
+- **Documentation:** https://bakerfi.notion.site/BakerFi-Documentation-58ad03351df447d082968b14952a7c3b
+- **Website:** https://bakerfi.xyz/
+- **X/Twitter:** https://x.com/bakerfi_
+- **Discord:** https://dub.sh/bakerfi-discord
+
+---
 
 # Scope
 
@@ -128,4 +197,103 @@
 | ./contracts/tests/LeverageTest.sol |
 | ./contracts/tests/RebaseLibraryTest.sol |
 | Totals: 100 |
+
+
+## Scoping Q &amp; A
+
+### General questions
+
+| Question                                | Answer                       |
+| --------------------------------------- | ---------------------------- |
+| ERC20 used by the protocol              |       Any (all possible ERC20s)             |
+| Test coverage                           | 76.07                         |
+| ERC721 used  by the protocol            |          N/A         |
+| ERC777 used by the protocol             |          N/A          |
+| ERC1155 used by the protocol            |          N/A         |
+| Chains the protocol will be deployed on | Ethereum,Arbitrum,Base |
+
+### ERC20 token behaviors in scope
+
+| Question                                                                                                                                                   | Answer |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| [Missing return values](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#missing-return-values)                                                      |   In scope  |
+| [Fee on transfer](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#fee-on-transfer)                                                                  |  Out of scope  |
+| [Balance changes outside of transfers](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#balance-modifications-outside-of-transfers-rebasingairdrops) | In scope    |
+| [Upgradeability](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#upgradable-tokens)                                                                 |   In scope  |
+| [Flash minting](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#flash-mintable-tokens)                                                              | In scope    |
+| [Pausability](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#pausable-tokens)                                                                      | In scope    |
+| [Approval race protections](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#approval-race-protections)                                              | In scope    |
+| [Revert on approval to zero address](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-approval-to-zero-address)                            | In scope    |
+| [Revert on zero value approvals](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-zero-value-approvals)                                    | In scope    |
+| [Revert on zero value transfers](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-zero-value-transfers)                                    | In scope    |
+| [Revert on transfer to the zero address](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-transfer-to-the-zero-address)                    | In scope    |
+| [Revert on large approvals and/or transfers](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-large-approvals--transfers)                  | Out of scope    |
+| [Doesn't revert on failure](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#no-revert-on-failure)                                                   |  In scope   |
+| [Multiple token addresses](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-zero-value-transfers)                                          | In scope    |
+| [Low decimals ( < 6)](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#low-decimals)                                                                 |   In scope  |
+| [High decimals ( > 18)](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#high-decimals)                                                              | In scope    |
+| [Blocklists](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#tokens-with-blocklists)                                                                | In scope    |
+
+### External integrations (e.g., Uniswap) behavior in scope:
+
+
+| Question                                                  | Answer |
+| --------------------------------------------------------- | ------ |
+| Enabling/disabling fees (e.g. Blur disables/enables fees) | Yes   |
+| Pausability (e.g. Uniswap pool gets paused)               |  Yes   |
+| Upgradeability (e.g. Uniswap gets upgraded)               |   Yes  |
+
+
+### EIP compliance checklist
+
+| Question                                | Answer                       |
+| --------------------------------------- | ---------------------------- |
+| contracts/core/Vault.sol                           | ERC4626               |
+| contracts/core/MultiStrategyVault.sol                           | ERC4626                     |
+
+
+# Additional context
+
+## Main invariants
+
+NA
+
+
+## Attack ideas (where to focus for bugs)
+- Blocking of funds
+- Assets Theif
+- Malicious user actions
+- Flash Loan Attacks
+- Reentrancy Attacks
+- Rebase Attacks
+- Rounding Errors
+- Slippage Attacks
+- Denial of Service
+
+## All trusted roles in the protocol
+
+| Role                                | 
+| --------------------------------------- |
+| Minter                          | 
+| Pauser                          | 
+| VaultManager                             | 
+
+## Describe any novel or unique curve logic or mathematical models implemented in the contracts:
+
+N/A
+
+## Running tests
+
+```bash
+git clone --recurse https://github.com/code-423n4/2024-12-bakerfi.git
+cd 2024-12-bakerfi
+npm install
+npx hardhat compile
+npx hardhat test
+```
+
+## Miscellaneous
+Employees of BakerFi and employees' family members are ineligible to participate in this audit.
+
+Code4rena's rules cannot be overridden by the contents of this README. In case of doubt, please check with C4 staff.
 
