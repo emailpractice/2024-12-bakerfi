@@ -96,7 +96,8 @@ Unlock higher yields with flexible, low-risk strategies that go beyond just ETH 
 | /contracts/core/strategies/StrategySupplyBase.sol | 1| **** | 65 | |@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/security/ReentrancyGuard.sol<br>@openzeppelin/contracts/access/Ownable.sol|
 | /contracts/core/strategies/StrategySupplyERC4626.sol | 1| **** | 25 | |@openzeppelin/contracts/interfaces/IERC4626.sol<br>@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol|
 | /contracts/core/strategies/StrategySupplyMorpho.sol | 1| **** | 56 | |@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@morpho-org/morpho-blue/src/interfaces/IMorpho.sol<br>@morpho-org/morpho-blue/src/libraries/MarketParamsLib.sol<br>@morpho-org/morpho-blue/src/libraries/periphery/MorphoLib.sol<br>@morpho-org/morpho-blue/src/libraries/periphery/MorphoBalancesLib.sol<br>@morpho-org/morpho-blue/src/libraries/SharesMathLib.sol|
-| **Totals** | **21** | **** | **1363** | | |
+| /contracts/core/hooks/UseIERC4626.sol | 1 | **** | 196
+| **Totals** | **22** | **** | **1559** | | |
 
 ### Files out of scope
 
@@ -116,7 +117,6 @@ Unlock higher yields with flexible, low-risk strategies that go beyond just ETH 
 | ./contracts/core/hooks/UseAAVEv3.sol |
 | ./contracts/core/hooks/UseFlashLender.sol |
 | ./contracts/core/hooks/UseIERC20.sol |
-| ./contracts/core/hooks/UseIERC4626.sol |
 | ./contracts/core/hooks/UseStETH.sol |
 | ./contracts/core/hooks/UseStrategy.sol |
 | ./contracts/core/hooks/UseUniQuoter.sol |
