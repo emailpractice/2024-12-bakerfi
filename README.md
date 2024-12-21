@@ -90,6 +90,7 @@ Unlock higher yields with flexible, low-risk strategies that go beyond just ETH 
 | /contracts/core/hooks/UseTokenActions.sol | 2| **** | 54 | |@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/token/ERC20/IERC20.sol|
 | /contracts/core/hooks/swappers/UseUnifiedSwapper.sol | 2| **** | 78 | |@openzeppelin/contracts/token/ERC20/IERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol|
 | /contracts/core/router/Commands.sol | 1| **** | 48 | ||
+| /contracts/core/strategies/StrategyLeverage.sol | 1| | 351 | ||
 | /contracts/core/strategies/StrategyLeverageAAVEv3.sol | 1| **** | 55 | |@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol<br>@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol|
 | /contracts/core/strategies/StrategyLeverageMorphoBlue.sol | 1| **** | 101 | |@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@morpho-org/morpho-blue/src/interfaces/IMorpho.sol<br>@morpho-org/morpho-blue/src/libraries/MarketParamsLib.sol<br>@morpho-org/morpho-blue/src/libraries/periphery/MorphoLib.sol<br>@morpho-org/morpho-blue/src/libraries/periphery/MorphoBalancesLib.sol<br>@morpho-org/morpho-blue/src/libraries/SharesMathLib.sol|
 | /contracts/core/strategies/StrategySupplyAAVEv3.sol | 1| **** | 35 | |@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol|
@@ -97,7 +98,7 @@ Unlock higher yields with flexible, low-risk strategies that go beyond just ETH 
 | /contracts/core/strategies/StrategySupplyERC4626.sol | 1| **** | 25 | |@openzeppelin/contracts/interfaces/IERC4626.sol<br>@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol|
 | /contracts/core/strategies/StrategySupplyMorpho.sol | 1| **** | 56 | |@openzeppelin/contracts/token/ERC20/ERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@morpho-org/morpho-blue/src/interfaces/IMorpho.sol<br>@morpho-org/morpho-blue/src/libraries/MarketParamsLib.sol<br>@morpho-org/morpho-blue/src/libraries/periphery/MorphoLib.sol<br>@morpho-org/morpho-blue/src/libraries/periphery/MorphoBalancesLib.sol<br>@morpho-org/morpho-blue/src/libraries/SharesMathLib.sol|
 | /contracts/core/hooks/UseIERC4626.sol | 1 | **** | 196
-| **Totals** | **22** | **** | **1559** | | |
+| **Totals** | **22** | **** | **1910** | | |
 
 ### Files out of scope
 
@@ -128,7 +129,6 @@ Unlock higher yields with flexible, low-risk strategies that go beyond just ETH 
 | ./contracts/core/hooks/swappers/UseUniV3Swapper.sol |
 | ./contracts/core/strategies/StrategyAeroSwapAnd.sol |
 | ./contracts/core/strategies/StrategyCurveSwapAnd.sol |
-| ./contracts/core/strategies/StrategyLeverage.sol |
 | ./contracts/core/strategies/StrategyLeverageSettings.sol |
 | ./contracts/core/strategies/StrategyPark.sol |
 | ./contracts/core/strategies/StrategySettings.sol |
