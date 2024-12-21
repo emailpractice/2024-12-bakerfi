@@ -8,8 +8,10 @@
 ./contracts/core/hooks/UseOracle.sol
 ./contracts/core/hooks/UsePermitTransfers.sol
 ./contracts/core/hooks/UseTokenActions.sol
+./contracts/core/hooks/UseIERC4626.sol
 ./contracts/core/hooks/swappers/UseUnifiedSwapper.sol
 ./contracts/core/router/Commands.sol
+./contracts/core/strategies/StrategyLeverage.sol
 ./contracts/core/strategies/StrategyLeverageAAVEv3.sol
 ./contracts/core/strategies/StrategyLeverageMorphoBlue.sol
 ./contracts/core/strategies/StrategySupplyAAVEv3.sol
