@@ -73,13 +73,9 @@ abstract contract VaultBase is
      * @dev Fallback function to accept ETH transfers.
      * Reverts if the sender is not the wrapped ETH address.
      */
-     //@seashell:  只允許hook裡面的 use weth 來轉給它eth。  use weth  可能負責eth的打包與解包 
-
-     //@audit:  這個合約有考慮到別人用self destruct 來轉eth給他嗎?
     receive() external payable override {
         if (msg.sender != wETHA()) revert ETHTransferNotAllowed(msg.sender);
     }
-    
     /**
      * @dev Initializes the base contract with the specified parameters.
      * @param initialOwner The address of the initial owner of the vault.
@@ -470,8 +466,6 @@ abstract contract VaultBase is
      * @dev Retrieves the token-to-Asset exchange rate.
      * @return rate The calculated token-to-ETH exchange rate.
      */
-          // @audit silverwind this does not return tokenPerAsset but assetPerToken
-     // //@audit: seashell 我感覺是正常的阿 是token per asset
     function tokenPerAsset() public view returns (uint256) {
         uint256 totalAssetsValue = totalAssets();
 
@@ -480,7 +474,6 @@ abstract contract VaultBase is
         }
 
         return (totalSupply() * _ONE) / totalAssetsValue;
-        //@seashell: balance of WETH 
     }
 
     /**

@@ -73,13 +73,9 @@ abstract contract VaultBase is
      * @dev Fallback function to accept ETH transfers.
      * Reverts if the sender is not the wrapped ETH address.
      */
-     //@seashell:  只允許hook裡面的 use weth 來轉給它eth。  use weth  可能負責eth的打包與解包 
-
-     //@audit:  這個合約有考慮到別人用self destruct 來轉eth給他嗎?
     receive() external payable override {
         if (msg.sender != wETHA()) revert ETHTransferNotAllowed(msg.sender);
     }
-    
     /**
      * @dev Initializes the base contract with the specified parameters.
      * @param initialOwner The address of the initial owner of the vault.
@@ -134,7 +130,7 @@ abstract contract VaultBase is
      * @return The amount of assets undeployed.
      */
     function _undeploy(uint256 assets) internal virtual returns (uint256);
-
+    // @audit-ok Silverwind takes the fee value depending on total asset percentage and mints it to feeReceiver
     function _harvestAndMintFees() internal {
         uint256 currentPosition = _totalAssets();
         if (currentPosition == 0) {
@@ -143,9 +139,10 @@ abstract contract VaultBase is
         int256 balanceChange = _harvest();
         if (balanceChange > 0) {
             address feeReceiver = getFeeReceiver();
-            uint256 performanceFee = getPerformanceFee();
+            uint256 performanceFee = getPerformanceFee(); // %1 by default but can be changed laterß
             if (feeReceiver != address(this) && feeReceiver != address(0) && performanceFee > 0) {
-                uint256 feeInEth = uint256(balanceChange) * performanceFee;
+                uint256 feeInEth = uint256(balanceChange) * performanceFee;//                   1e9
+                // @todo understand the decimal values of totalSupply() and _totalAssets()
                 uint256 sharesToMint = feeInEth.mulDivUp(totalSupply(), currentPosition * PERCENTAGE_PRECISION);
                 _mint(feeReceiver, sharesToMint);
             }
@@ -252,6 +249,7 @@ abstract contract VaultBase is
         // Check if deposit exceeds the maximum allowed per wallet
         uint256 maxDepositLocal = getMaxDeposit();
         if (maxDepositLocal > 0) {
+            // * I am here
             uint256 depositInAssets = (balanceOf(msg.sender) * _ONE) / tokenPerAsset();
             uint256 newBalance = assets + depositInAssets;
             if (newBalance > maxDepositLocal) revert MaxDepositReached();
@@ -453,6 +451,7 @@ abstract contract VaultBase is
      * @param shares The number of shares to be converted to assets.
      * @return assets The calculated amount of assets.
      */
+     // @audit-ok Silverwind
     function convertToAssets(uint256 shares) external view override returns (uint256 assets) {
         Rebase memory total = Rebase(totalAssets(), totalSupply());
         assets = total.toElastic(shares, false);
@@ -470,8 +469,7 @@ abstract contract VaultBase is
      * @dev Retrieves the token-to-Asset exchange rate.
      * @return rate The calculated token-to-ETH exchange rate.
      */
-          // @audit silverwind this does not return tokenPerAsset but assetPerToken
-     // //@audit: seashell 我感覺是正常的阿 是token per asset
+
     function tokenPerAsset() public view returns (uint256) {
         uint256 totalAssetsValue = totalAssets();
 
@@ -480,7 +478,6 @@ abstract contract VaultBase is
         }
 
         return (totalSupply() * _ONE) / totalAssetsValue;
-        //@seashell: balance of WETH 
     }
 
     /**

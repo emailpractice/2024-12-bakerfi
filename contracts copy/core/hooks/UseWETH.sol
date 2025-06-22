@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.24;
 
-import {IWETH} from "../../interfaces/tokens/IWETH.sol";  
+import {IWETH} from "../../interfaces/tokens/IWETH.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -31,10 +31,7 @@ abstract contract UseWETH is Initializable {
      * @param weth The address of the VaultRegistry contract for accessing WETH.
      */
     function _initUseWETH(address weth) internal onlyInitializing {
-        _wETH = IWETH(weth);  //@seashell: import interface IWETH.sol 
-        //@seashell:  這樣才可以用 IWETH 方法，去說weth這個地址是 IWETH 型別，
-        //@seashell: 基本上就是配合著IWETH這個介面 來讓我們能調用weth地址的函數 
-         
+        _wETH = IWETH(weth);
         if (address(_wETH) == address(0)) revert InvalidWETHContract();
     }
 
