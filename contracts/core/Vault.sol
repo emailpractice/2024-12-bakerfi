@@ -42,7 +42,12 @@ contract Vault is VaultBase {
      * This private state variable holds the reference to the IStrategy contract,
      * which defines the strategy for managing assets within the current contract.
      */
-    IStrategy private _strategy;
+    IStrategy private _strategy;  
+    //@seashell:  整個重點就是為了要在狀態變數裡面有一個地址 可以讓我調用它的函數 
+    //@seashell: 那我們可以選擇 1. IStrategy( 地址 ).函數
+    //@seashell: 或是像這邊一樣 先宣告一個 IStrategy狀態半數 
+    //@seashell: 然後在未來 可能在constructor裡面  再把IStrategy 型別的地址傳給這個變數存著 
+//@seashell:  反正我最終就是要有一個地址 然後說清楚這個地址是某個interface型別 ( 搭配預先import一個interface來完成 )
 
     /**
      * @dev The address of the asset being managed by the strategy.
