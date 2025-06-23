@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.24;
 
+
 import {IERC20Upgradeable} from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import {IStrategy} from "../interfaces/core/IStrategy.sol";
 import {SafeERC20Upgradeable} from "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
@@ -8,6 +9,7 @@ import {VaultBase} from "./VaultBase.sol";
 import {IVault} from "../interfaces/core/IVault.sol";
 import {MathLibrary} from "../libraries/MathLibrary.sol";
 import {VAULT_MANAGER_ROLE} from "./Constants.sol";
+
 
 /**
  * @title BakerFi Vault 🏦🧑‍🍳
@@ -43,11 +45,12 @@ contract Vault is VaultBase {
      * which defines the strategy for managing assets within the current contract.
      */
     IStrategy private _strategy;  
-    //@seashell:  整個重點就是為了要在狀態變數裡面有一個地址 可以讓我調用它的函數 
+    //@seashell:  整個重點就是為了要在狀態變數裡面有一個地址 可以讓我調用它的函數
     //@seashell: 那我們可以選擇 1. IStrategy( 地址 ).函數
-    //@seashell: 或是像這邊一樣 先宣告一個 IStrategy狀態半數 
-    //@seashell: 然後在未來 可能在constructor裡面  再把IStrategy 型別的地址傳給這個變數存著 
+    //@seashell: 或是像這邊一樣 先宣告一個 IStrategy狀態半數
+    //@seashell: 然後在未來 可能在constructor裡面  再把IStrategy 型別的地址傳給這個變數存著
 //@seashell:  反正我最終就是要有一個地址 然後說清楚這個地址是某個interface型別 ( 搭配預先import一個interface來完成 )
+
 
     /**
      * @dev The address of the asset being managed by the strategy.
@@ -55,16 +58,21 @@ contract Vault is VaultBase {
     address internal _strategyAsset;
     uint8 private constant _VAULT_VERSION = 3;
 
+
     using MathLibrary for uint256;
+
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() VaultBase() {
         _disableInitializers(); // Prevents the contract from being initialized again
     }
 
+
     uint8 public constant HARVEST_VAULT = 0x01; //
 
+
     using SafeERC20Upgradeable for IERC20Upgradeable;
+
 
     /**
      * @dev Initializes the contract with specified parameters.
@@ -93,11 +101,15 @@ contract Vault is VaultBase {
         IStrategy strategy,
         address weth
     ) public initializer {
-        _initializeBase(initialOwner, tokenName, tokenSymbol, weth); // Initializes the base contract
+        _initializeBase(initialOwner, tokenName, tokenSymbol, weth); // Initializes the base contract  //@seashell base跟vault都各自有init函數 
+但與其讓proxy合約呼叫兩次init 他在vault的init就把initbase也包進去一起執行。  因為 initializer 修飾符只能允許一次的init 所以一定要一起執行，至社為了防止被人再次init 奪走owner位置。  而且只執行一次init也是慣例，未來工作人員部屬的時候，正常也只會init一次 ，兩個包在一起執行可以避免他只init一個函數 讓部屬的合約變成只有一半的功能
+
+
         if (iAsset == address(0)) revert InvalidAsset();
         _strategyAsset = iAsset;
         _strategy = strategy; // Sets the strategy for the vault
     }
+
 
     /**
      * @dev Function to rebalance the strategy, prevent a liquidation and pay fees
@@ -112,6 +124,7 @@ contract Vault is VaultBase {
     function _harvest() internal virtual override returns (int256 balanceChange) {
         return _strategy.harvest(); // Calls the harvest function of the strategy
     }
+
 
     /**
      * @dev Deposits Ether into the contract and mints vault's shares for the specified receiver.
@@ -131,6 +144,7 @@ contract Vault is VaultBase {
         deployedAmount = _strategy.deploy(assets); // Calls the deploy function of the strategy
     }
 
+
     /**
      * @dev Withdraws a specified number of vault's shares, converting them to ETH/ERC20 and
      * transferring to the caller.
@@ -149,6 +163,7 @@ contract Vault is VaultBase {
         retAmount = _strategy.undeploy(assets); // Calls the undeploy function of the strategy
     }
 
+
     /**
      * @dev Retrieves the total assets controlled/belonging to the vault.
      *
@@ -162,9 +177,11 @@ contract Vault is VaultBase {
         amount = _strategy.totalAssets(); // Calls the totalAssets function of the strategy
     }
 
+
     function _asset() internal view virtual override returns (address) {
         return _strategyAsset;
     }
+
 
     /**
      * @dev Rebalances the strategy, prevent a liquidation and pay fees
@@ -192,5 +209,9 @@ contract Vault is VaultBase {
         }
     }
 
+
     uint256[50] private __gap;
 }
+
+
+
